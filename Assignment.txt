@@ -1,0 +1,351 @@
+//Problem-1
+package com.day5;
+import java.util.Scanner;
+class UserMainCode{
+	static  boolean ValidateDate(String s) {
+		try{
+			String[] a=s.split("-",3);
+		
+		int date=Integer.parseInt(a[0]);
+		int month=Integer.parseInt(a[1]);
+		int year=Integer.parseInt(a[2]);
+		if(date<=31 & month<=12 & year<=2021 ) {
+			return true;			
+		}
+		else {
+			return false;
+		}
+		}
+		catch(Exception e) {
+			//System.out.println(e);
+			return false;
+		}
+	}
+}
+
+public class IPL1 {
+
+	public static void main(String[] args) {
+		UserMainCode u=new UserMainCode();
+		UserMainCode v=new UserMainCode();
+		Scanner s=new Scanner(System.in);
+		System.out.println("Enter Date:");
+		String t;
+		t=s.nextLine();
+		//String s="02-06-2000";
+		//String t="05/04/2020";
+		boolean tf;
+		tf=u.ValidateDate(t);
+		if(tf==true) System.out.println("Valid");
+		else {
+			System.out.println("Invalid");
+		}
+	}
+
+}
+//Problem-2
+package com.day5;
+import java.util.Scanner;
+
+class UserMainCode1{
+	static boolean validateCity(String str) {
+		int len=str.length(),flag=0;
+		
+		boolean f1=Character.isLetter(str.charAt(0)); 
+		boolean f2=Character.isLetter(str.charAt(1));
+		
+		boolean l1=Character.isLetter(str.charAt(len-1));
+		boolean l2=Character.isLetter(str.charAt(len-2));
+	
+		for(int j=2;j<(len-2);j++){
+			if(str.charAt(j) != '*') {
+				flag += 1;
+			}
+		}
+		if(f1 == true && f2 == true && l1 == true && l2 == true && flag == 0 )
+		{
+			System.out.println("Valid");
+			return true;
+		}
+		else
+		{
+			System.out.println("Invalid");
+			return false;
+		}
+						
+	}
+}
+
+public class IPL2 {
+
+	public static void main(String[] args) {
+		System.out.println("Enter City Name:");
+		Scanner s =new Scanner(System.in);
+		String str=s.nextLine();
+		UserMainCode1.validateCity(str);
+		
+		
+
+	}
+
+}
+//Problem-3
+package com.day5;
+
+import java.util.Scanner;
+
+class UserMainCode2{
+	static void validatePlayer(String name) {
+		int len=name.length();
+		int count=0;
+		for(int i=1;i<len;i++) { 
+			if(name.charAt(i)=='a' || name.charAt(i)== 'A') {
+				count++;
+			}
+		}
+		if(count %2 != 0 || count ==0) {
+			System.out.println("valid");
+		}
+		else {
+			System.out.println("invalid");
+		}
+	}
+}
+
+public class IPL3 {
+
+	public static void main(String[] args) {
+		System.out.println("Enter Player Name:");
+		Scanner s = new Scanner(System.in);
+				String player =s.nextLine();
+        UserMainCode2.validatePlayer(player);
+	}
+
+}
+//Problem-4
+package com.day5;
+
+import java.util.Scanner;
+
+class Shapeb{
+	protected String shapename;
+
+	public Shapeb(String shapename) {
+		super();
+		this.shapename = shapename;
+	}
+	double calculateArea() {
+		return 0;
+	}
+	
+}
+class Square2 extends Shapeb{
+	private int side;
+
+	public Square2(String shapename, int side) {
+		super(shapename);
+		this.side=side;
+	}
+	public double calculateArea() {
+		return side*side;
+	}
+	
+}
+
+class Rectangle1 extends Shapeb{
+	private int length;
+	private int breadth;	
+	
+	public Rectangle1(String shapename, int length, int breadth) {
+		super("Rectangle");
+		this.length = length;
+		this.breadth = breadth;
+	}
+
+	double calculateArea() {
+		return length*breadth;
+	}
+	
+}
+class Circle1 extends Shapeb{
+	private int radius;	
+
+	public Circle1(String circle, int radius) {
+		super(circle);
+		this.radius = radius;
+	}
+	double calculateArea() {
+		return 3.14*radius*radius;
+	}
+	
+}
+
+public class Shape {
+
+	public static void main(String[] args) {
+		System.out.println("1. Rectangle \n2. Square \n3. Circle ");
+		System.out.println("Area calculator --- Enter your Shape:");
+		Scanner s = new Scanner(System.in);
+		int choice = s.nextInt();
+		if(choice == 1)
+		{
+			System.out.println("enter length:");
+			int length= s.nextInt();
+			System.out.println("Enter Breadth:");
+			int breadth = s.nextInt();
+			Rectangle1 r = new Rectangle1("Rectangle",length,breadth);
+			double a = r.calculateArea();
+			System.out.println("Area of Rectangle= "+a);
+			
+		}
+		else if(choice == 2) {
+			
+			System.out.println("Enter Side:");
+			int side=s.nextInt();
+			Square2 sq = new Square2("Square",side);
+			double a=sq.calculateArea();
+			System.out.println("Area of Square = "+a);
+		}
+		else if(choice==3) {
+			System.out.println("Enter Radius:");
+			int radius = s.nextInt();
+			Circle1 c = new Circle1("radius",radius);
+			double r=c.calculateArea();
+			System.out.println("Area of Circle= "+r);
+			
+		}
+		else {
+			System.out.println("Wrong Choice");
+		}
+		
+
+	}
+
+}
+//Exception-1
+package com.day5;
+
+import java.util.Scanner;
+
+public class Exception1 {
+
+	public static void main(String[] args) {
+		try {
+			System.out.println("Enter the number of overs");
+			Scanner s=new Scanner(System.in);
+			int overs=s.nextInt();
+			int runs[]=new int[overs];
+			System.out.println("Enter the number of runs for each over");
+			for(int i=0;i<overs;i++) {
+				runs[i]=s.nextInt();
+			}
+			System.out.println("enter the over number ");
+			int number =s.nextInt();
+			System.out.println(runs[number-1]);
+			
+		}
+		catch(ArrayIndexOutOfBoundsException | NegativeArraySizeException e) {
+			System.out.println(e);
+		}
+		}
+
+	}
+//Exception-2
+package com.day5;
+
+import java.util.Scanner;
+class CustomException extends Exception{	 
+
+	public CustomException() {
+	 super();
+	}
+
+	@Override
+	public String toString() {
+		return "CustomException:InvalidAgeRangeException";
+	}
+	
+	
+}
+
+public class Exception2 {
+
+	public static void main(String[] args) {
+		try {
+			System.out.println("Enter the player name");
+			Scanner s= new Scanner(System.in);
+			String name = s.nextLine();
+			System.out.println("Enter player age");
+			int age = s.nextInt();
+			if(age <19) {
+				throw new CustomException();
+			}
+			else {
+				System.out.println("Details are: ");
+				System.out.println("Player Name: "+name);
+				System.out.println("Player Age: "+age);
+			}
+			
+		}catch(CustomException e) {
+			System.out.println(e);
+		}
+
+	}
+
+}
+//Exception-3
+package com.day5;
+
+import java.util.Scanner;
+
+class TeamNameNotFoundException extends Exception{
+	TeamNameNotFoundException(String s){  
+	 super(s);  
+	}  
+}
+
+	public class IplExc {
+		
+		static void check(String teamName) throws TeamNameNotFoundException{ 
+			String[] teamList = new String[]{ "Chennai Super Kings","Deccan Chargers","Delhi Daredevils","Kings XI Punjab",
+					"Kolkata Knight Riders","Mumbai Indians","Rajasthan Royals","Royal Challengers Bangalore"};
+			boolean flag=true; 
+			for (String element : teamList) { 
+	            if (element.equals(teamName)) { 
+	            	flag=false;
+	            	break;
+	            }
+	            else {
+	            	flag=true;
+	            }
+	        } 
+			
+			if(flag)
+			{
+				throw new TeamNameNotFoundException("Entered team is not a part of IPL Season 4");
+			}
+			
+		}
+		     
+
+		public static void main(String[] args) {
+			try{  
+				Scanner s= new Scanner(System.in);
+				System.out.println("Enter the expected winner team of IPL Season 4 :");
+				String teamWinner = s.nextLine();
+				check(teamWinner);
+				System.out.println("Enter the expected runner Team of IPL Season 4 :");
+				String teamRunner = s.nextLine();
+				check(teamRunner);
+			    System.out.println("Expected IPL Season 4 winner: " + teamWinner);			    
+				System.out.println("Expected IPL Season 4 runner: " + teamRunner);
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}  
+			
+
+		}
+
+	}
+		
